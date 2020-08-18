@@ -6,6 +6,9 @@
   .swiper-wrapper {
     min-height: 100vh;
     box-sizing: border-box;
+    transition-property: transform;
+    transition-duration: 1s;
+    transition-delay: 1s;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(var(--vh, 1vh) * 100);
@@ -97,14 +100,22 @@
   font-size: 1.8rem;
   line-height: 2rem;
   opacity: 0;
+  transform: translate(-1%, 2.5%);
 
-  .swiper-slide-active &,
-  .swiper-slide-next & {
-    opacity: 0;
-    animation-name: slideIn;
-    animation-duration: $dur-medium;
-    animation-delay: $del-short;
-    animation-fill-mode: forwards;
+  transition: transform, opacity;
+  transition-duration: $dur-slow;
+
+  .slider__item--show & {
+    transform: translate(20%);
+  }
+
+  .swiper-slide-active &
+  {
+    opacity: 1;
+    transform: translateX(0);
+
+    transition-duration: $dur-medium;
+    transition-delay: $del-swiper + $del-short;
   }
 
   @media (min-width: $stop-scaling) {
@@ -132,6 +143,16 @@
     min-height: 14rem;
     font-size: 1.4rem;
     line-height: 1.5rem;
+  }
+
+  @media (min-width: $mobile) and (orientation: landscape) {
+    .swiper-slide-next & {
+      opacity: 1;
+      transform: translateX(0);
+  
+      transition-duration: .8s;
+      transition-delay: $del-swiper + .4s;
+    }
   }
 }
 
@@ -290,7 +311,7 @@
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(20%); 
+    transform: translateX($translate-percent); 
   }
   to {
     opacity: 1;
