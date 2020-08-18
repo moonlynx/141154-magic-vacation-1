@@ -96,6 +96,16 @@
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  opacity: 0;
+
+  .swiper-slide-active &,
+  .swiper-slide-next & {
+    opacity: 0;
+    animation-name: slideIn;
+    animation-duration: $dur-medium;
+    animation-delay: $del-short;
+    animation-fill-mode: forwards;
+  }
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;
@@ -274,5 +284,16 @@
       height: 0.4rem;
       background-color: $c-light;
     }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20%); 
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
