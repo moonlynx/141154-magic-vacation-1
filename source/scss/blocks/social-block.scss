@@ -77,21 +77,6 @@
     }
   }
 
-  &:focus,
-  &:hover {
-      & + .social-block__list {
-        opacity: 1;
-        pointer-events: auto;
-  
-        .social-block__link--fb,
-        .social-block__link--insta,
-        .social-block__link--vk {
-          opacity: 1;
-          transform: translate(0);
-        }
-      }
-    }
-
   &:active,
   &:active:focus {
     color: $c-light;
@@ -113,6 +98,20 @@
   margin-top: 1.5rem;
   opacity: 1;
   pointer-events: none;
+
+  .social-block--active &,
+  .social-block__toggler:focus + &,
+  .social-block__toggler:hover + & {
+    opacity: 1;
+    pointer-events: auto;
+
+    .social-block__link--fb,
+    .social-block__link--insta,
+    .social-block__link--vk {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
 
 
   @media (min-width: $stop-scaling) {
@@ -240,7 +239,7 @@
   &--insta,
   &--vk {
     opacity: 0;
-    transform: translate(20%);
+    transform: translate($translate-percent);
     transition: $dur-fast ease;
     transition-property: transform opacity;
   }
