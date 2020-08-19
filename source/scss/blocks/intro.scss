@@ -115,6 +115,12 @@
 
   p {
     margin: 0;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-delay: .3s;
   }
 
   svg {

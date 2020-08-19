@@ -17,6 +17,7 @@
   height: 4rem;
   color: $c-dark;
   border-radius: 50%;
+  transition: $dur-fast ease color;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     display: none;
@@ -26,7 +27,8 @@
     display: none;
   }
 
-  &::before {
+  &::before,
+  &::after {
     @include center;
     content: "";
     width: 100%;
@@ -35,6 +37,12 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition: $dur-fast ease;
+    transition-property: opacity background-color;
+  }
+
+  &::before {
+    opacity: 0;
   }
 
   svg {
@@ -49,22 +57,23 @@
     color: $c-purple;
 
     &::before {
+      opacity: 1;
       width: 112.5%;
       height: 112.5%;
     }
   }
 
   &:focus {
-    color: $c-purple;
+    color: $c-light;
     outline: none;
 
     &::before {
-      border-color: $c-purple;
+      opacity: 0;
     }
 
-    & + .social-block__list {
-      opacity: 1;
-      pointer-events: auto;
+    &::after {
+      background-color: $c-purple;
+      border: none;
     }
   }
 
@@ -87,8 +96,23 @@
   top: 100%;
   right: 0;
   margin-top: 1.5rem;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
+
+  .social-block--active &,
+  .social-block__toggler:focus + &,
+  .social-block__toggler:hover + & {
+    opacity: 1;
+    pointer-events: auto;
+
+    .social-block__link--fb,
+    .social-block__link--insta,
+    .social-block__link--vk {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+
 
   @media (min-width: $stop-scaling) {
     margin-top: 15px;
@@ -135,6 +159,8 @@
   &:focus-within {
     opacity: 1;
     pointer-events: auto;
+
+    transition: $dur-fast ease opacity;
   }
 
   .social-block--active & {
@@ -168,6 +194,9 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+  // opacity: 0;
+  // transition: $dur-fast;
+  // transition-property: opacity;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -206,6 +235,15 @@
     @include center;
   }
 
+  &--fb,
+  &--insta,
+  &--vk {
+    opacity: 0;
+    transform: translate($translate-percent);
+    transition: $dur-fast ease;
+    transition-property: transform opacity;
+  }
+
   &--fb {
     svg {
       width: 0.8rem;
@@ -219,6 +257,9 @@
   }
 
   &--insta {
+    transition-delay: 0.1s;
+    transition-duration: 0.5s;
+
     svg {
       width: 1.5rem;
       height: 1.5rem;
@@ -231,6 +272,9 @@
   }
 
   &--vk {
+    transition-delay: 0.2s;
+    transition-duration: 0.7s;
+
     svg {
       width: 1.7rem;
       height: 1rem;
