@@ -35,6 +35,17 @@
   padding: 1rem 0;
   width: 10rem;
   color: $c-light;
+  opacity: 0;
+  transform: translateX(-50%);
+
+  transition-property: transform, opacity;
+  transition-duration: $dur-slow;
+  transition-timing-function: $bez-fast;
+
+  .page__ready & {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
   @media (min-width: $stop-scaling) {
     top: -5px;
@@ -177,6 +188,15 @@
   font-size: 1.2rem;
   line-height: 1.0418;
   color: $c-light;
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: $dur-slow;
+  transition-timing-function: $bez-fast;
+
+  .page__ready & {
+    opacity: 1;
+  }
 
   @media (min-width: $stop-scaling) {
     font-size: 12px;
@@ -268,10 +288,12 @@
       }
     }
 
-    &.active {
+    .page__ready &.active {
       &::after {
         display: block;
-        width: 100%
+        width: 100%;
+        left: 0;
+        right: auto;
       }
     }
 
@@ -293,6 +315,15 @@
 
 .page-header__social {
   margin-left: 4.8rem;
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: $dur-fast;
+  transition-timing-function: $bez-fast;
+
+  .page__ready & {
+    opacity: 1;
+  }
 
   @media (min-width: $stop-scaling) {
     margin-left: 48px;
