@@ -1,13 +1,18 @@
 import throttle from 'lodash/throttle';
 
+const STORY_ID = 1;
+const PRIZES_ID = 2;
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
+    this.overlapElement = document.querySelector(`.bg_overlap`);
 
     this.activeScreen = 0;
+    this.prevActiveScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -29,6 +34,7 @@ export default class FullPageScroll {
 
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
+    this.prevActiveScreen = this.activeScreen;
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
   }
@@ -44,8 +50,15 @@ export default class FullPageScroll {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
     });
+
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.prevActiveScreen === STORY_ID  && this.activeScreen === PRIZES_ID) {
+      this.overlapElement.classList.add(`active`);
+    } else {
+      this.overlapElement.classList.remove(`active`);
+    }
   }
 
   changeActiveMenuItem() {
