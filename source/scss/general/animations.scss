@@ -17,3 +17,32 @@
         width: 100%;
     }
 }
+
+@keyframes animScale {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes animOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animSwipe {
+  0% {
+    opacity: 0;
+    transform: translateX(20%); 
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
