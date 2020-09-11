@@ -2,6 +2,7 @@ import throttle from 'lodash/throttle';
 
 const STORY_ID = 1;
 const PRIZES_ID = 2;
+const RULES_ID = 3;
 
 export default class FullPageScroll {
   constructor() {
@@ -46,6 +47,8 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
+    let rulesBtn; 
+
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
@@ -53,6 +56,13 @@ export default class FullPageScroll {
 
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.prevActiveScreen === RULES_ID) {
+      rulesBtn = document.querySelector('.rules__link');
+      if (rulesBtn.classList.contains('active')) {
+        rulesBtn.classList.remove('active');
+      }
+    }
 
     if (this.prevActiveScreen === STORY_ID  && this.activeScreen === PRIZES_ID) {
       this.overlapElement.classList.add(`active`);
