@@ -23,7 +23,9 @@ rules();
 
 const fullPageScroll = new FullPageScroll();
 const body = document.body;
+
 fullPageScroll.init();
+// introTitleString.prepareText();
 
 window.addEventListener('load', () => {
     body.classList.add('page__ready');

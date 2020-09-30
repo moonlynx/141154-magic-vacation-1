@@ -1,0 +1,25 @@
+.text--word {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 5px;
+    padding-top: 0.3em;    
+    line-height: 0.6em;
+
+    & > span {
+        display: inline-block;
+        transform: translate3d(0, 1em, 0);
+        will-change: transform;
+    }
+
+    .active__title & > span {   
+        transform: translate3d(0, 0, 0);
+    }
+
+    .intro__title & {
+        letter-spacing: -0.06em;
+    }
+
+    .intro__date & {
+        letter-spacing: -0.04em;
+    }
+}
