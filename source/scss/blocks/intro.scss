@@ -30,7 +30,7 @@
   font-family: $font-alt;
   font-weight: 400;
   font-size: 12rem;
-  line-height: 0.906;
+  line-height: 0;
   letter-spacing: -0.04em;
 
   @media (min-width: $stop-scaling) {
@@ -40,7 +40,7 @@
 
   @media (max-width: $tablet) and (orientation: portrait) {
     max-width: 100%;
-    font-size: 3.6rem;
+    font-size: 3.59rem;
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
@@ -120,7 +120,7 @@
     animation-duration: .5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
-    animation-delay: .3s;
+    animation-delay: .8s;
   }
 
   svg {

@@ -1,16 +1,35 @@
 import throttle from 'lodash/throttle';
+import StringBuilder from './string-builder';
 
+const INTRO_ID = 0;
 const STORY_ID = 1;
 const PRIZES_ID = 2;
 const RULES_ID = 3;
 
 export default class FullPageScroll {
   constructor() {
+    const introTitle = document.querySelector('.intro__title');
+    const introDate = document.querySelector('.intro__date');
+
     this.THROTTLE_TIMEOUT = 2000;
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
     this.overlapElement = document.querySelector(`.bg_overlap`);
+    
+    this.introTitle = new StringBuilder(introTitle, {
+        wordClass: 'text--word',
+        activateClass: 'active__title',
+        property: 'transform',
+        delay: 0
+    });
+
+    this.introDate = new StringBuilder(introDate, {
+      wordClass: 'text--word',
+      activateClass: 'active__title',
+      property: 'transform',
+      delay: 700
+    });
 
     this.activeScreen = 0;
     this.prevActiveScreen = 0;
@@ -47,7 +66,7 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    let rulesBtn; 
+    let rulesBtn;
 
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
@@ -56,6 +75,16 @@ export default class FullPageScroll {
 
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.prevActiveScreen === INTRO_ID) {
+      this.introTitle.destroyAnimation();
+      this.introDate.destroyAnimation();
+    }
+
+    if (this.activeScreen === INTRO_ID) {
+      this.introTitle.runAnimation();
+      this.introDate.runAnimation();
+    }
 
     if (this.prevActiveScreen === RULES_ID) {
       rulesBtn = document.querySelector('.rules__link');
