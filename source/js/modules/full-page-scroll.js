@@ -1,10 +1,13 @@
 import throttle from 'lodash/throttle';
+import { CompressedTextureLoader } from 'three';
 import StringBuilder from './string-builder';
 
 const INTRO_ID = 0;
 const STORY_ID = 1;
 const PRIZES_ID = 2;
 const RULES_ID = 3;
+
+const P1_ICON_PATH = "img/prize1.svg";
 
 export default class FullPageScroll {
   constructor() {
@@ -67,6 +70,7 @@ export default class FullPageScroll {
 
   changeVisibilityDisplay() {
     let rulesBtn;
+    let p1Icon;
 
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
@@ -84,6 +88,14 @@ export default class FullPageScroll {
     if (this.activeScreen === INTRO_ID) {
       this.introTitle.runAnimation();
       this.introDate.runAnimation();
+    }
+
+    if (this.activeScreen === PRIZES_ID) {
+      p1Icon = document.querySelector('.prizes__item--journeys img');
+
+      if (p1Icon.src !== P1_ICON_PATH) {
+        p1Icon.src = P1_ICON_PATH;
+      }
     }
 
     if (this.prevActiveScreen === RULES_ID) {
