@@ -127,6 +127,21 @@
   }
 
   &--journeys {
+    & img {
+      animation-play-state: paused;
+    }
+
+    .prizes__list.active & {
+      animation-name: movePrizes1;
+      animation-delay: 500ms;
+      animation-duration: 2s;
+      animation-fill-mode: both;
+
+      & p {
+        opacity: 0;
+      }
+    }
+
     .prizes__icon {
       position: relative;
       left: -5.9rem;
@@ -158,6 +173,14 @@
 
   &--cases {
     margin-left: 7rem;
+
+    .prizes__list.active & {
+      animation-name: movePrizes2;
+      animation-delay: 2500ms;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
 
     @media (min-width: $stop-scaling) {
       margin-left: 70px;
@@ -191,6 +214,14 @@
   }
 
   &--codes {
+    .prizes__list.active & {
+      animation-name: movePrizes3;
+      animation-delay: 2500ms;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
     }
@@ -328,5 +359,23 @@
       width: 0.5rem;
       height: 0.5rem;
     }
+  }
+}
+
+@keyframes movePrizes1 {
+  from {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes movePrizes2 {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes movePrizes3 {
+  from {
+    opacity: 0;
   }
 }
