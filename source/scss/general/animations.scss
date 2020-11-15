@@ -18,6 +18,15 @@
     }
 }
 
+@keyframes animHeight {
+  from {
+      height: 0%;
+  }
+  to {
+      height: 100%;
+  }
+}
+
 @keyframes animScale {
   from {
     transform: scale(0);
