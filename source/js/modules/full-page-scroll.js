@@ -8,6 +8,7 @@ const PRIZES_ID = 2;
 const RULES_ID = 3;
 
 const P1_ICON_PATH = "img/prize1.svg";
+const P2_ICON_PATH = "img/prize2.svg";
 
 export default class FullPageScroll {
   constructor() {
@@ -34,8 +35,8 @@ export default class FullPageScroll {
       delay: 700
     });
 
-    this.activeScreen = 0;
-    this.prevActiveScreen = 0;
+    this.activeScreen;
+    this.prevActiveScreen;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -63,14 +64,17 @@ export default class FullPageScroll {
   }
 
   changePageDisplay() {
-    this.changeVisibilityDisplay();
-    this.changeActiveMenuItem();
-    this.emitChangeDisplayEvent();
+    if (this.prevActiveScreen !== this.activeScreen) {
+      this.changeVisibilityDisplay();
+      this.changeActiveMenuItem();
+      this.emitChangeDisplayEvent();
+    }
   }
 
   changeVisibilityDisplay() {
     let rulesBtn;
     let p1Icon;
+    let p2Icon;
 
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
@@ -92,9 +96,14 @@ export default class FullPageScroll {
 
     if (this.activeScreen === PRIZES_ID) {
       p1Icon = document.querySelector('.prizes__item--journeys img');
+      p2Icon = document.querySelector('.prizes__item--cases img');
 
       if (p1Icon.src !== P1_ICON_PATH) {
         p1Icon.src = P1_ICON_PATH;
+      }
+
+      if (p2Icon.src !== P2_ICON_PATH) {
+        p2Icon.src = P2_ICON_PATH;
       }
     }
 
@@ -107,6 +116,7 @@ export default class FullPageScroll {
 
     if (this.prevActiveScreen === STORY_ID  && this.activeScreen === PRIZES_ID) {
       this.overlapElement.classList.add(`active`);
+
     } else {
       this.overlapElement.classList.remove(`active`);
     }

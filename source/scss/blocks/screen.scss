@@ -368,14 +368,15 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 0%;
+  height: 100%;
   background-color: $c-dark;
+  z-index: 1;
 
   transition: none;
 
   &.active {
-    height: 100%;
-    z-index: 1;
-    transition: $dur-slow height;
+    animation-name: animHeight;
+    animation-timing-function: ease-in;
+    animation-duration: $dur-slow;
   }
 }
