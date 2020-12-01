@@ -36,8 +36,8 @@ export default class FullPageScroll {
       delay: 700
     });
 
-    this.activeScreen = 0;
-    this.prevActiveScreen = 0;
+    this.activeScreen;
+    this.prevActiveScreen;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -65,9 +65,11 @@ export default class FullPageScroll {
   }
 
   changePageDisplay() {
-    this.changeVisibilityDisplay();
-    this.changeActiveMenuItem();
-    this.emitChangeDisplayEvent();
+    if (this.prevActiveScreen !== this.activeScreen) {
+      this.changeVisibilityDisplay();
+      this.changeActiveMenuItem();
+      this.emitChangeDisplayEvent();
+    }
   }
 
   changeVisibilityDisplay() {
@@ -121,6 +123,7 @@ export default class FullPageScroll {
 
     if (this.prevActiveScreen === STORY_ID  && this.activeScreen === PRIZES_ID) {
       this.overlapElement.classList.add(`active`);
+
     } else {
       this.overlapElement.classList.remove(`active`);
     }

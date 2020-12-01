@@ -6,7 +6,7 @@
         attributeType="CSS"
         attributeName="opacity"
         values="1; 0"
-        dur="0.5s"
+        dur="1s"
         begin="animCloud1.end + 0.5s"
         fill="freeze"
       />
@@ -16,7 +16,7 @@
             attributeName="transform"
             type="translate"
             values="0 0; 0 -50"
-            dur="0.5s"
+            dur="1s"
             begin="animOpacityClouds.begin"
             additive="sum"
             fill="freeze"
@@ -31,7 +31,7 @@
             keySplines="0 0 0.4 1"
             calcMode="spline"
             dur="0.7s"
-            begin="0s"
+            begin="4.5s"
             additive="sum"
             fill="freeze"
           />
@@ -54,7 +54,7 @@
             attributeName="transform"
             type="translate"
             values="0 0; 0 -90" 
-            dur="0.5s"
+            dur="1s"
             begin="animOpacityClouds.begin" 
             additive="sum"
             fill="freeze"
@@ -87,7 +87,16 @@
         </g>
     </g>
 
-    <g id="backFlower">
+    <g id="backFlower" opacity="0">
+      <animate
+        attributeType="CSS"
+        attributeName="opacity"
+        values="0; 1"
+        dur="1s"
+        begin="animCloud1.begin"
+        fill="freeze"
+      />
+
       <g>
         <animateTransform
           id="animBackFlower"
@@ -172,7 +181,16 @@
       <path d="M215.46 83.44C205.53 83.44 197.46 104.34 196.92 138.76C196.92 138.85 196.92 138.93 196.92 139.02C196.92 132.26 205.22 126.77 215.45 126.77C225.68 126.77 234 132.27 234 139C234 138.91 234 138.83 234 138.74C233.49 104.31 225.4 83.41 215.48 83.41" fill="#F7396B"/>
     </g>
 
-    <g id="frontFlower">
+    <g id="frontFlower" opacity="0">
+      <animate
+        attributeType="CSS"
+        attributeName="opacity"
+        values="0; 1"
+        dur="1s"
+        begin="animCloud1.begin"
+        fill="freeze"
+      />
+
       <animateTransform
         id="animFrontFlower"
         attributeName="transform"
