@@ -1,5 +1,4 @@
 import throttle from 'lodash/throttle';
-import { CompressedTextureLoader } from 'three';
 import StringBuilder from './string-builder';
 
 const INTRO_ID = 0;

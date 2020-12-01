@@ -4,7 +4,7 @@
       attributeType="CSS"
       attributeName="opacity"
       values="0; 1"
-      begin="0s"
+      begin="5.5s"
       dur="0.5s"
       fill="freeze"
     />
