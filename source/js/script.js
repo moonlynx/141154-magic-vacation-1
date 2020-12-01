@@ -29,4 +29,12 @@ fullPageScroll.init();
 
 window.addEventListener('load', () => {
     body.classList.add('page__ready');
+
+    // let paths = document.querySelectorAll('.result--negative path');
+
+    // console.log(paths);
+
+    // paths.forEach((path) => {
+    //     console.log(path.getTotalLength());
+    // })
 });

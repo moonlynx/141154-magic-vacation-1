@@ -14,6 +14,18 @@ export default () => {
         });
         targetEl[0].classList.add(`screen--show`);
         targetEl[0].classList.remove(`screen--hidden`);
+
+        switch (target) {
+          case "result":
+            document.querySelector('#titleResultOpacity').beginElement();
+          break;
+          case "result2":
+            document.querySelector('#titleResult2Opacity').beginElement();
+          break;
+          case "result3":
+            document.querySelector('#titleResult3Opacity').beginElement();
+          break;
+        }
       });
     }
 
