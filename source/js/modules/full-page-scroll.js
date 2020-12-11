@@ -1,19 +1,28 @@
 import throttle from 'lodash/throttle';
 import StringBuilder from './string-builder';
+import Timer from './timer';
+
+import showResultScreen from './result';
 
 const INTRO_ID = 0;
 const STORY_ID = 1;
 const PRIZES_ID = 2;
 const RULES_ID = 3;
+const GAME_ID = 4;
 
 const P1_ICON_PATH = "img/prize1.svg";
 const P2_ICON_PATH = "img/prize2.svg";
 const P3_ICON_PATH = "img/prize3.svg";
 
+const RESULT1 = "result";
+const RESULT2 = "result2";
+const RESULT3 = "result3";
+
 export default class FullPageScroll {
   constructor() {
     const introTitle = document.querySelector('.intro__title');
     const introDate = document.querySelector('.intro__date');
+    const timerNode = document.querySelector('.game__counter');
 
     this.THROTTLE_TIMEOUT = 2000;
 
@@ -33,6 +42,12 @@ export default class FullPageScroll {
       activateClass: 'active__title',
       property: 'transform',
       delay: 700
+    });
+
+    this.gameTimer = new Timer({
+      nodesList: timerNode.children,
+      time: 300000,
+      endCB: () => { showResultScreen(RESULT3); }
     });
 
     this.activeScreen;
@@ -77,6 +92,8 @@ export default class FullPageScroll {
     let p2Icon;
     let p3Icon;
 
+    console.log(this.activeScreen);
+
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
@@ -118,6 +135,15 @@ export default class FullPageScroll {
       if (rulesBtn.classList.contains('active')) {
         rulesBtn.classList.remove('active');
       }
+    }
+
+    if (this.activeScreen === GAME_ID) {
+        this.gameTimer.start();
+    }
+
+    if (this.prevActiveScreen === GAME_ID) {
+        this.gameTimer.reset();
+        this.gameTimer.stop();
     }
 
     if (this.prevActiveScreen === STORY_ID  && this.activeScreen === PRIZES_ID) {
