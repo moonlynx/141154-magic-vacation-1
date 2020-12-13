@@ -1,6 +1,7 @@
 import throttle from 'lodash/throttle';
-import StringBuilder from './string-builder';
-import Timer from './timer';
+import StringBuilder from '../helpers/StringBuilder';
+import TextAnimation from '../helpers/TextAnimation';
+import Timer from '../helpers/Timer';
 
 import showResultScreen from './result';
 
@@ -23,6 +24,10 @@ export default class FullPageScroll {
     const introTitle = document.querySelector('.intro__title');
     const introDate = document.querySelector('.intro__date');
     const timerNode = document.querySelector('.game__counter');
+
+    const journeysNumField = document.querySelector('.prizes__item--journeys .prizes__desc b');
+    const casesNumField = document.querySelector('.prizes__item--cases .prizes__desc b');
+    const codesNumField = document.querySelector('.prizes__item--codes .prizes__desc b');
 
     this.THROTTLE_TIMEOUT = 2000;
 
@@ -48,6 +53,33 @@ export default class FullPageScroll {
       nodesList: timerNode.children,
       time: 300000,
       endCB: () => { showResultScreen(RESULT3); }
+    });
+
+    this.codesCounter = new TextAnimation({
+      node: codesNumField,
+      start: 11,
+      end: Number(codesNumField.innerText),
+      fps: 12,
+      duration: 1000
+    });
+
+    this.casesCounter = new TextAnimation({
+      node: casesNumField,
+      start: 0,
+      end: Number(casesNumField.innerText),
+      fps: 12,
+      duration: 1000
+    });
+
+    this.journeysCounter = new TextAnimation({
+      node: journeysNumField,
+      start: 0,
+      end: Number(journeysNumField.innerText),
+      fps: 12,
+      duration: 1000,
+      endCB: () => {
+    
+      }
     });
 
     this.activeScreen;
@@ -91,8 +123,9 @@ export default class FullPageScroll {
     let p1Icon;
     let p2Icon;
     let p3Icon;
-
-    console.log(this.activeScreen);
+    let p1Desc;
+    let p2Desc;
+    let p3Desc;
 
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
@@ -113,20 +146,43 @@ export default class FullPageScroll {
     }
 
     if (this.activeScreen === PRIZES_ID) {
-      p1Icon = document.querySelector('.prizes__item--journeys img');
-      p2Icon = document.querySelector('.prizes__item--cases img');
-      p3Icon = document.querySelector('.prizes__item--codes img');
+      if (!this.journeysCounter.isActive()) {
+        p1Desc = document.querySelector('.prizes__item--journeys .prizes__desc');
+        p2Desc = document.querySelector('.prizes__item--cases .prizes__desc');
+        p3Desc = document.querySelector('.prizes__item--codes .prizes__desc');
 
-      if (p1Icon.src !== P1_ICON_PATH) {
-        p1Icon.src = P1_ICON_PATH;
-      }
+        document.querySelector('.prizes__item--journeys').classList.add('active');
 
-      if (p2Icon.src !== P2_ICON_PATH) {
-        p2Icon.src = P2_ICON_PATH;
-      }
+        p1Icon = document.querySelector('.prizes__item--journeys img');
+        p2Icon = document.querySelector('.prizes__item--cases img');
+        p3Icon = document.querySelector('.prizes__item--codes img');
 
-      if (p3Icon.src !== P3_ICON_PATH) {
-        p3Icon.src = P3_ICON_PATH;
+        if (p1Icon.src !== P1_ICON_PATH) {
+          p1Icon.src = P1_ICON_PATH;
+        }
+  
+        if (p2Icon.src !== P2_ICON_PATH) {
+          p2Icon.src = P2_ICON_PATH;
+        }
+  
+        if (p3Icon.src !== P3_ICON_PATH) {
+          p3Icon.src = P3_ICON_PATH;
+        }
+
+        setTimeout(() => {
+          p1Desc.classList.add('active');
+          this.journeysCounter.start();
+        }, 2000);
+  
+        setTimeout(() => {
+          p2Desc.classList.add('active');
+          this.casesCounter.start();
+        }, 4100);
+  
+        setTimeout(() => {
+          p3Desc.classList.add('active');
+          this.codesCounter.start();
+        }, 6000);
       }
     }
 

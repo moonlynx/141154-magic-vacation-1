@@ -127,18 +127,17 @@
   }
 
   &--journeys {
-    & img {
-      animation-play-state: paused;
-    }
-
-    .prizes__list.active & {
+    &.active{
       animation-name: movePrizes1;
       animation-delay: 500ms;
       animation-duration: 2s;
       animation-fill-mode: both;
+    }
 
-      & p {
-        opacity: 0;
+    @media (orientation: portrait) {
+      &.active{
+        animation-delay: 0ms;
+        animation-duration: 0s;
       }
     }
 
@@ -182,6 +181,16 @@
       animation-play-state: paused;
     }
 
+    & b {
+      width: 5.5rem;
+    }
+
+    @media (max-width: 1024px) and (orientation: landscape) {
+      & b {
+        width: 3rem;
+      }
+    }
+
     @media (min-width: $stop-scaling) {
       margin-left: 70px;
     }
@@ -207,6 +216,7 @@
         left: -0.7em;
         bottom: 0;
         width: 9.4rem;
+        margin-right: 2.2rem;
       }
 
       @media (max-width: $tablet) and (orientation: landscape) {
@@ -227,6 +237,16 @@
       animation-duration: 1s;
       animation-fill-mode: both;
       animation-play-state: paused;
+    }
+
+    & b {
+      width: 19rem;
+    }
+
+    @media (max-width: 1024px) and (orientation: landscape) {
+      & b {
+        width: 9rem;
+      }
     }
 
     @media (max-width: $tablet) and (orientation: portrait) {
@@ -273,6 +293,13 @@
   margin: 5.6rem 0 0 0;
   font-size: 1.8rem;
   line-height: 1.1;
+  opacity: 0;
+
+  &.active {
+    transition-property: opacity;
+    transition-duration: $dur-slow; 
+    opacity: 1;
+  }
 
   @media (min-width: $stop-scaling) {
     margin-top: 56px;

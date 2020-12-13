@@ -31,7 +31,7 @@
             keySplines="0 0 0.4 1"
             calcMode="spline"
             dur="0.7s"
-            begin="4.5s"
+            begin="4s"
             additive="sum"
             fill="freeze"
           />
