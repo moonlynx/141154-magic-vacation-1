@@ -1,5 +1,9 @@
+import SeaCalfScene from "../helpers/2d/SeaCalfScene";
+
 function showResultScreen(result) {
   let results = document.querySelectorAll(`.screen--result`);
+
+  let resultScene;
 
   if (results.length) {
     [].slice.call(results).forEach(function (el) {
@@ -15,6 +19,8 @@ function showResultScreen(result) {
     switch (result) {
       case "result":
         document.querySelector('#titleResultOpacity').beginElement();
+        resultScene = new SeaCalfScene(document.getElementById('result1-bg'));
+        resultScene.play();
       break;
       case "result2":
         document.querySelector('#titleResult2Opacity').beginElement();
