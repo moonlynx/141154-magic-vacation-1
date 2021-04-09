@@ -65,7 +65,6 @@ export default class Scene {
   
             if (loadingCounter === Object.keys(imagesUrls).length) {
               this.isLoaded = true;
-              console.log('images loaded');
               if (this.isWaitingForImages) {
                 this.start();
               } else {
@@ -206,7 +205,7 @@ export default class Scene {
   
     draw() {
       this.clear();
-  
+
       for (const name in this.objects) {
         if (Object.prototype.hasOwnProperty.call(this.objects, name)) {
           const object = this.objects[name];

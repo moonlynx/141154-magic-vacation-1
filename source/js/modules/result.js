@@ -1,4 +1,5 @@
 import SeaCalfScene from "../helpers/2d/SeaCalfScene";
+import CrocodileScene from "../helpers/2d/CrocodileScene";
 
 function showResultScreen(result) {
   let results = document.querySelectorAll(`.screen--result`);
@@ -27,6 +28,8 @@ function showResultScreen(result) {
       break;
       case "result3":
         document.querySelector('#titleResult3Opacity').beginElement();
+        resultScene = new CrocodileScene(document.getElementById('result3-bg'));
+        resultScene.play();
       break;
     }
   }
