@@ -19,7 +19,7 @@ const OBJECTS = {
     x: 50,
     y: 50,
     size: 25,
-    opacity: 1,
+    opacity: 0,
     transforms: {
       translateY: 0
     }
@@ -147,6 +147,7 @@ export default class CrocodileScene extends Scene {
     this.initLeafAnimations();
     this.initSaturnAnimations();
     this.initCrocodileAnimations();
+    this.initKeyAnimations();
   }
 
   initCrocodileAnimations() {
@@ -167,6 +168,22 @@ export default class CrocodileScene extends Scene {
       callback: () => {
         this.initDropAnimations();
       }
+    }));
+  }
+
+  initKeyAnimations() {
+    let o = this.objects.key;
+
+    this.animations.push(new Animation({
+      func: (progress) => {
+        const progressReversed = 1 - progress;
+
+        o.size = OBJECTS['key'].size * 0.5 * progress + OBJECTS['key'].size * 0.5;
+        o.opacity = progress;
+      },
+      duration: 500,
+      delay: this._DELAY_START + 100,
+      easing: easing.easeOutCubic,
     }));
   }
 
@@ -213,7 +230,7 @@ export default class CrocodileScene extends Scene {
         o.transforms.translateY = -12 * progress;
       },
       duration: 1000,
-      delay: this._DELAY_START + 400,
+      delay: this._DELAY_START + 200,
       easing: easing.easeOutCubic,
       callback: () => {
         let animation = new Animation({
@@ -246,7 +263,7 @@ export default class CrocodileScene extends Scene {
         o.transforms.translateY = -20 * progress;
       },
       duration: 1000,
-      delay: this._DELAY_START + 400,
+      delay: this._DELAY_START + 200,
       easing: easing.easeOutCubic,
       callback: () => {
         let animation = new Animation({
@@ -277,7 +294,7 @@ export default class CrocodileScene extends Scene {
         o.transforms.translateY = 20 * progress;
       },
       duration: 1000,
-      delay: this._DELAY_START + 400,
+      delay: this._DELAY_START + 200,
       easing: easing.easeOutCubic,
       callback: () => {
         let animation = new Animation({
@@ -308,7 +325,7 @@ export default class CrocodileScene extends Scene {
         o.transforms.translateY = 5 * progress;
       },
       duration: 1000,
-      delay: this._DELAY_START + 400,
+      delay: this._DELAY_START + 200,
       easing: easing.easeOutCubic,
       callback: () => {
         let animation = new Animation({
@@ -339,7 +356,7 @@ export default class CrocodileScene extends Scene {
         o.transforms.translateY = 20 * progress;
       },
       duration: 1000,
-      delay: this._DELAY_START + 400,
+      delay: this._DELAY_START + 200,
       easing: easing.easeOutCubic,
       callback: () => {
         let animation = new Animation({
