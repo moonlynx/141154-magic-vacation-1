@@ -53,7 +53,7 @@ export default class Timer {
         seconds = seconds % 60;
         
         if (Number(this._fieldMin.innerText) !== minutes) {
-            this._fieldMin.innerText = (minutes < 10) ? "0" + minutes : minutes;;
+            this._fieldMin.innerText = (minutes < 10) ? "0" + minutes : minutes;
         }
         
         if (Number(this._fieldSec.innerText) !== seconds) {

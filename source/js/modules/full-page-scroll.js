@@ -76,10 +76,7 @@ export default class FullPageScroll {
       start: 0,
       end: Number(journeysNumField.innerText),
       fps: 12,
-      duration: 1000,
-      endCB: () => {
-    
-      }
+      duration: 1000
     });
 
     this.activeScreen;
@@ -172,6 +169,7 @@ export default class FullPageScroll {
         setTimeout(() => {
           p1Desc.classList.add('active');
           this.journeysCounter.start();
+          document.querySelector('.prizes__item--journeys').classList.remove('active');
         }, 2000);
   
         setTimeout(() => {

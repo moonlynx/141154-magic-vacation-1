@@ -12,8 +12,18 @@ export default class Animation {
       this.options.duration = 1000;
     }
 
+    if (this.options.count) {
+      this.options.count = Math.floor(Math.abs(this.options.count));      
+    } else {
+      this.options.count = 1;
+    }
+
     if (!this.options.delay) {
       this.options.delay = 0;
+    }
+
+    if (!this.options.repeatDelay) {
+      this.options.repeatDelay = this.options.delay;
     }
 
     if (!this.options.fps) {
@@ -24,7 +34,7 @@ export default class Animation {
     this.requestId = null;
   }
 
-  start(options) {
+  start(options, isRepeated) {
     this.stop();
 
     this.timeoutId = setTimeout(() => {
@@ -80,10 +90,15 @@ export default class Animation {
             }
 
             if (this.isFinished) {
-              this.stop();
+              this.options.count -= 1;
+              if (this.options.count > 0) {
+                this.start(options, true);
+              } else {
+                this.stop();
 
-              if (typeof this.options.callback === `function`) {
-                this.options.callback();
+                if (typeof this.options.callback === `function`) {
+                  this.options.callback();
+                }
               }
             }
           }
@@ -91,7 +106,7 @@ export default class Animation {
       }
 
       this.requestId = requestAnimationFrame(animateFrame);
-    }, this.options.delay);
+    }, (isRepeated ? this.options.repeatedDelay : this.options.delay));
   }
 
   restart() {
