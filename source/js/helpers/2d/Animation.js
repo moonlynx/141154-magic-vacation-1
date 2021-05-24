@@ -12,9 +12,7 @@ export default class Animation {
       this.options.duration = 1000;
     }
 
-    if (this.options.count) {
-      this.options.count = Math.floor(Math.abs(this.options.count));      
-    } else {
+    if (!this.options.count) {
       this.options.count = 1;
     }
 
@@ -90,14 +88,21 @@ export default class Animation {
             }
 
             if (this.isFinished) {
-              this.options.count -= 1;
-              if (this.options.count > 0) {
+              if (this.options.count == 'infinite') {
                 this.start(options, true);
+                
               } else {
-                this.stop();
+                this.options.count -= 1;
 
-                if (typeof this.options.callback === `function`) {
-                  this.options.callback();
+                if (this.options.count > 0) {
+                  this.start(options, true);
+
+                } else {
+                  this.stop();
+  
+                  if (typeof this.options.callback === `function`) {
+                    this.options.callback();
+                  }
                 }
               }
             }

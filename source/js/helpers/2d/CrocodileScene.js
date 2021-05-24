@@ -207,7 +207,7 @@ export default class CrocodileScene extends Scene {
         }
       },
       duration: 2000,
-      count: 3,
+      count: 'infinite',
       repeatedDelay: 500,
       delay: this._DELAY_START,
       easing: easing.easeInCubic,
