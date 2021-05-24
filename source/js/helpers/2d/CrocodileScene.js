@@ -157,7 +157,7 @@ export default class CrocodileScene extends Scene {
       func: (progress) => {
         const progressReversed = 1 - progress;
 
-        o.size = OBJECTS['crocodile'].size * progress;
+        o.size = 110 * progress;
         o.transforms.rotate = 30 * progressReversed;
         o.transforms.translateX = 55 * progressReversed - 6;
         o.transforms.translateY = 8 * progress;
@@ -176,9 +176,7 @@ export default class CrocodileScene extends Scene {
 
     this.animations.push(new Animation({
       func: (progress) => {
-        const progressReversed = 1 - progress;
-
-        o.size = OBJECTS['key'].size * 0.5 * progress + OBJECTS['key'].size * 0.5;
+        o.size = 25 * 0.5 * (progress + 1);
         o.opacity = progress;
       },
       duration: 500,
